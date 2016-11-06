@@ -14,15 +14,17 @@ class DirectoryHandler(prefix: String, genotypeVersion: String, assemblyName: St
   // Extract the type of file
   val filePattern = """^Individuals_([0-9]+)(_(.*))?\.tsv$""".r
   // Extract the Genotype version number
-  val genotypePattern = """^Individuals_([0-9]+)_(v[0-9]+)_Genotypes\.tsv$""".r
+  //val genotypePattern = """^Individuals_([0-9]+)_(v[0-9]+)_Genotypes\.tsv$""".r
+  val genotypePattern = """^Individuals_([0-9]+)_(v[0-9]+i*)_Genotypes\.tsv$""".r
 
   // Run a function without having to care if it succeeds or fails
-  def ignore(possibleFailure: () => Unit) =
+  def ignore(str:String, possibleFailure: () => Unit) =
     try {
       possibleFailure()
     } catch {
       case e : Throwable =>
-        logger.warn(e.getMessage)
+        //logger.warn(str+" - "+e.getMessage) commented out because each warning is an object. No enough memory to support them all
+	None
     }
 
   // This is the main function in this file
@@ -45,7 +47,7 @@ class DirectoryHandler(prefix: String, genotypeVersion: String, assemblyName: St
             reader.foreach { row =>
               val visit = Visit.newBuilder()
               visit.setVisitId(row(0))
-              ignore(() => visit.setVisitDateEpoch(dateFormat.parse(row(1)).getTime))
+              ignore(id+"-"+"setVisitDateEpoch",() => visit.setVisitDateEpoch(dateFormat.parse(row(1)).getTime))
               visit.setStudyId(row(2))
               visit.setIsFasting(Try(java.lang.Boolean.valueOf(row(3))).getOrElse(false))
               visit.setDescription(row(4))
@@ -58,11 +60,20 @@ class DirectoryHandler(prefix: String, genotypeVersion: String, assemblyName: St
               phenotype.setPhenotypeType(row(1))
               phenotype.setPhenotypeGroup(row(2))
               phenotype.setName(row(3))
-              ignore(() => phenotype.setMeasureDataType(MeasureDataType.valueOf(row(4))))
+           
+              //begin DMA
+              //ignore(() => phenotype.setMeasureDataType(MeasureDataType.valueOf(row(4))))
+	      if(row(4) == "") None// phenotype.setMeasureDataType(MeasureDataType.valueOf(Unknown))
+	      else ignore(id+"-"+"setMeasureDataType",() => phenotype.setMeasureDataType(MeasureDataType.valueOf(row(4))))
+	      //end DMA
+
               phenotype.setMeasure(row(5))
               phenotype.setMeasureUnits(row(6))
               phenotype.setDescription(row(7))
-              ignore(() => phenotype.setDiagnosisDateEpoch(dateFormat.parse(row(8)).getTime))
+	      //begin DMA
+	      if(row(8) =="") None
+              else ignore(id+"-"+"setDiagnosisDateEpoch",() => phenotype.setDiagnosisDateEpoch(dateFormat.parse(row(8)).getTime))
+             //end DMA
               record.phenotypes = phenotype :: record.phenotypes // Each row in the csv adds a phenotype to the list
             }
           // The current file is for the Individual
@@ -78,12 +89,18 @@ class DirectoryHandler(prefix: String, genotypeVersion: String, assemblyName: St
               individual.setFamilyId(row(1))
               individual.setFatherId(row(2))
               individual.setMotherId(row(3))
-              ignore(() => individual.setBirthDateEpoch(dateFormat.parse(row(4)).getTime))
+              ignore(id+"-"+"setBirthDateEpoch",() => individual.setBirthDateEpoch(dateFormat.parse(row(4)).getTime))
               individual.setEthnicCode(row(6))
               individual.setCentreName(row(7))
               individual.setRegion(row(8))
               individual.setCountry(row(9))
               individual.setNotes(row(10))
+
+              //dma
+              if(row(11) == "") None
+	      else ignore(id+"-"+"setMissingCallFreq",() =>individual.setMissingCallFreq(java.lang.Float.parseFloat(row(11))))
+              //dma 
+
               // Ignore the first NB_INDIVIDUAL_COLUMNS
               // Map the remaining columns (batch IDs) with the HashMap of batch data by ID
               // Flatten: List[Option[T]] -> List[T]
@@ -108,17 +125,37 @@ class DirectoryHandler(prefix: String, genotypeVersion: String, assemblyName: St
                 // DBSNP data
                 val variant = Variant.newBuilder()
                 variant.setContig(contig.build())
-                ignore(() => variant.setStart(java.lang.Long.parseLong(row(6))))
-                ignore(() => variant.setEnd(java.lang.Long.parseLong(row(7))))
+                ignore(id+"-"+"setStart",() => variant.setStart(java.lang.Long.parseLong(row(6))))
+                ignore(id+"-"+"setEnd",() => variant.setEnd(java.lang.Long.parseLong(row(7))))
                 variant.setReferenceAllele(row(8))
                 variant.setAlternateAllele(row(9))
 
                 val alleles: List[GenotypeAllele] = List() // List of GenotypeAllele Ref, Alt, OtherAlt, NoCall
-
+              
                 val genotype = Genotype.newBuilder()
+
                 genotype.setVariant(variant.build())
                 // genotype.setSampleId(row(2)) // NULL for now. Leaving this commented, as documentation
                 genotype.setAlleles(alleles)
+
+
+		//begin dma
+                //val likelihoods: List[java.lang.Float] = List(row(12).toFloat,row(13).toFloat,row(14).toFloat) // List of Likelihoods
+		if (row(12) == "" && row(13) == "" && row(14) == "") None
+		else {	
+			try {
+			      val likelihoods: List[java.lang.Float] = List(row(12).toFloat,row(13).toFloat,row(14).toFloat) // List of Likelihoods
+			      genotype.setGenotypeLikelihoods(likelihoods)
+			    } catch {
+			      case e : Throwable =>
+				logger.warn(row(5) + " - " +e.getMessage)
+			    }
+		}
+
+                genotype.setVariantIdentifier(row(4))
+
+                //end dma
+
                 record.genotypes = genotype :: record.genotypes // Each row in the csv adds a genotype to the list
               }
             }

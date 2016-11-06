@@ -7,8 +7,10 @@ package org.bdgenomics.formats.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Genotype extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Genotype\",\"namespace\":\"org.bdgenomics.formats.avro\",\"fields\":[{\"name\":\"variant\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Variant\",\"fields\":[{\"name\":\"variantErrorProbability\",\"type\":[\"null\",\"int\"],\"doc\":\"The Phred scaled error probability of a variant, given the probabilities of\\n   the variant in a population.\",\"default\":null},{\"name\":\"contig\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Contig\",\"doc\":\"Record for describing a reference assembly. Not used for storing the contents\\n of said assembly.\\n\\n @see NucleotideContigFragment\",\"fields\":[{\"name\":\"contigName\",\"type\":[\"null\",\"string\"],\"doc\":\"The name of this contig in the assembly (e.g., \\\"chr1\\\").\",\"default\":null},{\"name\":\"contigLength\",\"type\":[\"null\",\"long\"],\"doc\":\"The length of this contig.\",\"default\":null},{\"name\":\"contigMD5\",\"type\":[\"null\",\"string\"],\"doc\":\"The MD5 checksum of the assembly for this contig.\",\"default\":null},{\"name\":\"referenceURL\",\"type\":[\"null\",\"string\"],\"doc\":\"The URL at which this reference assembly can be found.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",\"string\"],\"doc\":\"The name of this assembly (e.g., \\\"hg19\\\").\",\"default\":null},{\"name\":\"species\",\"type\":[\"null\",\"string\"],\"doc\":\"The species that this assembly is for.\",\"default\":null},{\"name\":\"referenceIndex\",\"type\":[\"null\",\"int\"],\"doc\":\"Optional 0-based index of this contig in a SAM file header that it was read\\n   from; helps output SAMs/BAMs with headers in the same order as they started\\n   with, before a conversion to ADAM.\",\"default\":null}]}],\"doc\":\"The reference contig that this variant exists on.\",\"default\":null},{\"name\":\"start\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based start position of this variant on the reference contig.\",\"default\":null},{\"name\":\"end\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based, exclusive end position of this variant on the reference contig.\",\"default\":null},{\"name\":\"referenceAllele\",\"type\":[\"null\",\"string\"],\"doc\":\"A string describing the reference allele at this site.\",\"default\":null},{\"name\":\"alternateAllele\",\"type\":[\"null\",\"string\"],\"doc\":\"A string describing the variant allele at this site. Should be left null if\\n   the site is a structural variant.\",\"default\":null},{\"name\":\"svAllele\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"StructuralVariant\",\"fields\":[{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"StructuralVariantType\",\"doc\":\"Descriptors for the type of a structural variant. The most specific descriptor\\n should be used, if possible. E.g., duplication should be used instead of\\n insertion if the inserted sequence is not novel. Tandem duplication should\\n be used instead of duplication if the duplication is known to follow the\\n duplicated sequence.\",\"symbols\":[\"DELETION\",\"INSERTION\",\"INVERSION\",\"MOBILE_INSERTION\",\"MOBILE_DELETION\",\"DUPLICATION\",\"TANDEM_DUPLICATION\"]}],\"doc\":\"The type of this structural variant.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",\"string\"],\"doc\":\"The URL of the FASTA/NucleotideContig assembly for this structural variant,\\n   if one is available.\",\"default\":null},{\"name\":\"precise\",\"type\":[\"boolean\",\"null\"],\"doc\":\"Whether this structural variant call has precise breakpoints or not. Default\\n   value is true. If the call is imprecise, confidence intervals should be provided.\",\"default\":true},{\"name\":\"startWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the start of the structural variant.\",\"default\":null},{\"name\":\"endWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the end of the structural variant.\",\"default\":null}]}],\"doc\":\"The structural variant at this site, if the alternate allele is a structural\\n   variant. If the site is not a structural variant, this field should be left\\n   null.\",\"default\":null},{\"name\":\"isSomatic\",\"type\":[\"boolean\",\"null\"],\"doc\":\"A boolean describing whether this variant call is somatic; in this case, the\\n   `referenceAllele` will have been observed in another sample.\",\"default\":false}]}],\"doc\":\"The variant called at this site.\",\"default\":null},{\"name\":\"variantCallingAnnotations\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"VariantCallingAnnotations\",\"fields\":[{\"name\":\"variantIsPassing\",\"type\":[\"null\",\"boolean\"],\"default\":null},{\"name\":\"variantFilters\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"default\":[]},{\"name\":\"downsampled\",\"type\":[\"null\",\"boolean\"],\"doc\":\"True if the reads covering this site were randomly downsampled to reduce coverage.\",\"default\":null},{\"name\":\"baseQRankSum\",\"type\":[\"null\",\"float\"],\"doc\":\"The Wilcoxon rank-sum test statistic of the base quality scores. The base quality\\n   scores are separated by whether or not the base supports the reference or the\\n   alternate allele.\",\"default\":null},{\"name\":\"fisherStrandBiasPValue\",\"type\":[\"null\",\"float\"],\"doc\":\"The Fisher's exact test score for the strand bias of the reference and alternate\\n   alleles. Stored as a phred scaled probability. Thus, if:\\n\\n   * a = The number of positive strand reads covering the reference allele\\n   * b = The number of positive strand reads covering the alternate allele\\n   * c = The number of negative strand reads covering the reference allele\\n   * d = The number of negative strand reads covering the alternate allele\\n\\n   This value takes the score:\\n   \\n   -10 log((a + b)! * (c + d)! * (a + c)! * (b + d)! / (a! b! c! d! n!)\\n\\n   Where n = a + b + c + d.\",\"default\":null},{\"name\":\"rmsMapQ\",\"type\":[\"null\",\"float\"],\"doc\":\"The root mean square of the mapping qualities of reads covering this site.\",\"default\":null},{\"name\":\"mapq0Reads\",\"type\":[\"null\",\"int\"],\"doc\":\"The number of reads at this site with mapping quality equal to 0.\",\"default\":null},{\"name\":\"mqRankSum\",\"type\":[\"null\",\"float\"],\"doc\":\"The Wilcoxon rank-sum test statistic of the mapping quality scores. The mapping\\n   quality scores are separated by whether or not the read supported the reference or the\\n   alternate allele.\",\"default\":null},{\"name\":\"readPositionRankSum\",\"type\":[\"null\",\"float\"],\"doc\":\"The Wilcoxon rank-sum test statistic of the position of the base in the read at this site.\\n   The positions are separated by whether or not the base supports the reference or the\\n   alternate allele.\",\"default\":null},{\"name\":\"genotypePriors\",\"type\":{\"type\":\"array\",\"items\":\"float\"},\"doc\":\"The log scale prior probabilities of the various genotype states at this site.\\n   The number of elements in this array should be equal to the ploidy at this\\n   site, plus 1.\",\"default\":[]},{\"name\":\"genotypePosteriors\",\"type\":{\"type\":\"array\",\"items\":\"float\"},\"doc\":\"The log scaled posterior probabilities of the various genotype states at this site,\\n   in this sample. The number of elements in this array should be equal to the ploidy at\\n   this site, plus 1.\",\"default\":[]},{\"name\":\"vqslod\",\"type\":[\"null\",\"float\"],\"doc\":\"The log-odds ratio of being a true vs. false variant under a trained statistical model.\\n    This model can be a multivariate Gaussian mixture, support vector machine, etc.\",\"default\":null},{\"name\":\"culprit\",\"type\":[\"null\",\"string\"],\"doc\":\"If known, the feature that contributed the most to this variant being classified as\\n   a false variant.\",\"default\":null},{\"name\":\"attributes\",\"type\":{\"type\":\"map\",\"values\":\"string\"},\"doc\":\"Additional feature info that doesn't fit into the standard fields above.\\n\\n   They are all encoded as (string, string) key-value pairs.\",\"default\":{}}]}],\"doc\":\"Statistics collected at this site, if available.\",\"default\":null},{\"name\":\"sampleId\",\"type\":[\"null\",\"string\"],\"doc\":\"The unique identifier for this sample.\",\"default\":null},{\"name\":\"sampleDescription\",\"type\":[\"null\",\"string\"],\"doc\":\"A description of this sample.\",\"default\":null},{\"name\":\"processingDescription\",\"type\":[\"null\",\"string\"],\"doc\":\"A string describing the provenance of this sample and the processing applied\\n   in genotyping this sample.\",\"default\":null},{\"name\":\"alleles\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"enum\",\"name\":\"GenotypeAllele\",\"doc\":\"An enumeration that describes the allele that corresponds to a genotype. Can take\\n the following values:\\n\\n * Ref: The genotype is the reference allele\\n * Alt: The genotype is the alternate allele\\n * OtherAlt: The genotype is an unspecified other"," alternate allele. This occurs\\n   in our schema when we have split a multi-allelic genotype into two genotype\\n   records.\\n * NoCall: The genotype could not be called.\",\"symbols\":[\"Ref\",\"Alt\",\"OtherAlt\",\"NoCall\"]}},\"doc\":\"An array describing the genotype called at this site. The length of this\\n   array is equal to the ploidy of the sample at this site. This array may\\n   reference OtherAlt alleles if this site is multi-allelic in this sample.\",\"default\":[]},{\"name\":\"expectedAlleleDosage\",\"type\":[\"null\",\"float\"],\"doc\":\"The expected dosage of the alternate allele in this sample.\",\"default\":null},{\"name\":\"referenceReadDepth\",\"type\":[\"null\",\"int\"],\"doc\":\"The number of reads that show evidence for the reference at this site.\\n\\n   @see alternateReadDepth\\n   @see readDepth\",\"default\":null},{\"name\":\"alternateReadDepth\",\"type\":[\"null\",\"int\"],\"doc\":\"The number of reads that show evidence for this alternate allele at this site.\\n\\n   @see referenceReadDepth\\n   @see readDepth\",\"default\":null},{\"name\":\"readDepth\",\"type\":[\"null\",\"int\"],\"doc\":\"The total number of reads at this site. May not equal (alternateReadDepth +\\n   referenceReadDepth) if this site shows evidence of multiple alternate alleles.\\n\\n   @see referenceReadDepth\\n   @see alternateReadDepth\\n\\n   @note Analogous to VCF's DP.\",\"default\":null},{\"name\":\"minReadDepth\",\"type\":[\"null\",\"int\"],\"doc\":\"The minimum number of reads seen at this site across samples when joint\\n   calling variants.\\n\\n   @note Analogous to VCF's MIN_DP.\",\"default\":null},{\"name\":\"genotypeQuality\",\"type\":[\"null\",\"int\"],\"doc\":\"The phred-scaled probability that we're correct for this genotype call.\\n\\n   @note Analogous to VCF's GQ.\",\"default\":null},{\"name\":\"genotypeLikelihoods\",\"type\":{\"type\":\"array\",\"items\":\"float\"},\"doc\":\"Log scaled likelihoods that we have n copies of this alternate allele.\\n   The number of elements in this array should be equal to the ploidy at this\\n   site, plus 1.\\n\\n   @note Analogous to VCF's PL.\",\"default\":[]},{\"name\":\"nonReferenceLikelihoods\",\"type\":{\"type\":\"array\",\"items\":\"float\"},\"doc\":\"Log scaled likelihoods that we have n non-reference alleles at this site.\\n   The number of elements in this array should be equal to the ploidy at this\\n   site, plus 1.\",\"default\":[]},{\"name\":\"strandBiasComponents\",\"type\":{\"type\":\"array\",\"items\":\"int\"},\"doc\":\"Component statistics which comprise the Fisher's Exact Test to detect strand bias.\\n   If populated, this element should have length 4.\",\"default\":[]},{\"name\":\"splitFromMultiAllelic\",\"type\":[\"boolean\",\"null\"],\"doc\":\"We split multi-allelic VCF lines into multiple\\n   single-alternate records.  This bit is set if that happened for this\\n   record.\",\"default\":false},{\"name\":\"isPhased\",\"type\":[\"boolean\",\"null\"],\"doc\":\"True if this genotype is phased.\\n\\n   @see phaseSetId\\n   @see phaseQuality\",\"default\":false},{\"name\":\"phaseSetId\",\"type\":[\"null\",\"int\"],\"doc\":\"The ID of this phase set, if this genotype is phased. Should only be populated\\n   if isPhased == true; else should be null.\\n\\n   @see isPhased\",\"default\":null},{\"name\":\"phaseQuality\",\"type\":[\"null\",\"int\"],\"doc\":\"Phred scaled quality score for the phasing of this genotype, if this genotype\\n   is phased. Should only be populated if isPhased == true; else should be null.\\n\\n   @see isPhased\",\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Genotype\",\"namespace\":\"org.bdgenomics.formats.avro\",\"fields\":[{\"name\":\"variantIdentifier\",\"type\":[\"null\",\"string\"],\"doc\":\"The variant identifier (RS number in studies).\",\"default\":null},{\"name\":\"variant\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Variant\",\"fields\":[{\"name\":\"variantErrorProbability\",\"type\":[\"null\",\"int\"],\"doc\":\"The Phred scaled error probability of a variant, given the probabilities of\\n   the variant in a population.\",\"default\":null},{\"name\":\"contig\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Contig\",\"doc\":\"Record for describing a reference assembly. Not used for storing the contents\\n of said assembly.\\n\\n @see NucleotideContigFragment\",\"fields\":[{\"name\":\"contigName\",\"type\":[\"null\",\"string\"],\"doc\":\"The name of this contig in the assembly (e.g., \\\"chr1\\\").\",\"default\":null},{\"name\":\"contigLength\",\"type\":[\"null\",\"long\"],\"doc\":\"The length of this contig.\",\"default\":null},{\"name\":\"contigMD5\",\"type\":[\"null\",\"string\"],\"doc\":\"The MD5 checksum of the assembly for this contig.\",\"default\":null},{\"name\":\"referenceURL\",\"type\":[\"null\",\"string\"],\"doc\":\"The URL at which this reference assembly can be found.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",\"string\"],\"doc\":\"The name of this assembly (e.g., \\\"hg19\\\").\",\"default\":null},{\"name\":\"species\",\"type\":[\"null\",\"string\"],\"doc\":\"The species that this assembly is for.\",\"default\":null},{\"name\":\"referenceIndex\",\"type\":[\"null\",\"int\"],\"doc\":\"Optional 0-based index of this contig in a SAM file header that it was read\\n   from; helps output SAMs/BAMs with headers in the same order as they started\\n   with, before a conversion to ADAM.\",\"default\":null}]}],\"doc\":\"The reference contig that this variant exists on.\",\"default\":null},{\"name\":\"start\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based start position of this variant on the reference contig.\",\"default\":null},{\"name\":\"end\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based, exclusive end position of this variant on the reference contig.\",\"default\":null},{\"name\":\"referenceAllele\",\"type\":[\"null\",\"string\"],\"doc\":\"A string describing the reference allele at this site.\",\"default\":null},{\"name\":\"alternateAllele\",\"type\":[\"null\",\"string\"],\"doc\":\"A string describing the variant allele at this site. Should be left null if\\n   the site is a structural variant.\",\"default\":null},{\"name\":\"svAllele\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"StructuralVariant\",\"fields\":[{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"StructuralVariantType\",\"doc\":\"Descriptors for the type of a structural variant. The most specific descriptor\\n should be used, if possible. E.g., duplication should be used instead of\\n insertion if the inserted sequence is not novel. Tandem duplication should\\n be used instead of duplication if the duplication is known to follow the\\n duplicated sequence.\",\"symbols\":[\"DELETION\",\"INSERTION\",\"INVERSION\",\"MOBILE_INSERTION\",\"MOBILE_DELETION\",\"DUPLICATION\",\"TANDEM_DUPLICATION\"]}],\"doc\":\"The type of this structural variant.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",\"string\"],\"doc\":\"The URL of the FASTA/NucleotideContig assembly for this structural variant,\\n   if one is available.\",\"default\":null},{\"name\":\"precise\",\"type\":[\"boolean\",\"null\"],\"doc\":\"Whether this structural variant call has precise breakpoints or not. Default\\n   value is true. If the call is imprecise, confidence intervals should be provided.\",\"default\":true},{\"name\":\"startWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the start of the structural variant.\",\"default\":null},{\"name\":\"endWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the end of the structural variant.\",\"default\":null}]}],\"doc\":\"The structural variant at this site, if the alternate allele is a structural\\n   variant. If the site is not a structural variant, this field should be left\\n   null.\",\"default\":null},{\"name\":\"isSomatic\",\"type\":[\"boolean\",\"null\"],\"doc\":\"A boolean describing whether this variant call is somatic; in this case, the\\n   `referenceAllele` will have been observed in another sample.\",\"default\":false}]}],\"doc\":\"The variant called at this site.\",\"default\":null},{\"name\":\"variantCallingAnnotations\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"VariantCallingAnnotations\",\"fields\":[{\"name\":\"variantIsPassing\",\"type\":[\"null\",\"boolean\"],\"default\":null},{\"name\":\"variantFilters\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"default\":[]},{\"name\":\"downsampled\",\"type\":[\"null\",\"boolean\"],\"doc\":\"True if the reads covering this site were randomly downsampled to reduce coverage.\",\"default\":null},{\"name\":\"baseQRankSum\",\"type\":[\"null\",\"float\"],\"doc\":\"The Wilcoxon rank-sum test statistic of the base quality scores. The base quality\\n   scores are separated by whether or not the base supports the reference or the\\n   alternate allele.\",\"default\":null},{\"name\":\"fisherStrandBiasPValue\",\"type\":[\"null\",\"float\"],\"doc\":\"The Fisher's exact test score for the strand bias of the reference and alternate\\n   alleles. Stored as a phred scaled probability. Thus, if:\\n\\n   * a = The number of positive strand reads covering the reference allele\\n   * b = The number of positive strand reads covering the alternate allele\\n   * c = The number of negative strand reads covering the reference allele\\n   * d = The number of negative strand reads covering the alternate allele\\n\\n   This value takes the score:\\n   \\n   -10 log((a + b)! * (c + d)! * (a + c)! * (b + d)! / (a! b! c! d! n!)\\n\\n   Where n = a + b + c + d.\",\"default\":null},{\"name\":\"rmsMapQ\",\"type\":[\"null\",\"float\"],\"doc\":\"The root mean square of the mapping qualities of reads covering this site.\",\"default\":null},{\"name\":\"mapq0Reads\",\"type\":[\"null\",\"int\"],\"doc\":\"The number of reads at this site with mapping quality equal to 0.\",\"default\":null},{\"name\":\"mqRankSum\",\"type\":[\"null\",\"float\"],\"doc\":\"The Wilcoxon rank-sum test statistic of the mapping quality scores. The mapping\\n   quality scores are separated by whether or not the read supported the reference or the\\n   alternate allele.\",\"default\":null},{\"name\":\"readPositionRankSum\",\"type\":[\"null\",\"float\"],\"doc\":\"The Wilcoxon rank-sum test statistic of the position of the base in the read at this site.\\n   The positions are separated by whether or not the base supports the reference or the\\n   alternate allele.\",\"default\":null},{\"name\":\"genotypePriors\",\"type\":{\"type\":\"array\",\"items\":\"float\"},\"doc\":\"The log scale prior probabilities of the various genotype states at this site.\\n   The number of elements in this array should be equal to the ploidy at this\\n   site, plus 1.\",\"default\":[]},{\"name\":\"genotypePosteriors\",\"type\":{\"type\":\"array\",\"items\":\"float\"},\"doc\":\"The log scaled posterior probabilities of the various genotype states at this site,\\n   in this sample. The number of elements in this array should be equal to the ploidy at\\n   this site, plus 1.\",\"default\":[]},{\"name\":\"vqslod\",\"type\":[\"null\",\"float\"],\"doc\":\"The log-odds ratio of being a true vs. false variant under a trained statistical model.\\n    This model can be a multivariate Gaussian mixture, support vector machine, etc.\",\"default\":null},{\"name\":\"culprit\",\"type\":[\"null\",\"string\"],\"doc\":\"If known, the feature that contributed the most to this variant being classified as\\n   a false variant.\",\"default\":null},{\"name\":\"attributes\",\"type\":{\"type\":\"map\",\"values\":\"string\"},\"doc\":\"Additional feature info that doesn't fit into the standard fields above.\\n\\n   They are all encoded as (string, string) key-value pairs.\",\"default\":{}}]}],\"doc\":\"Statistics collected at this site, if available.\",\"default\":null},{\"name\":\"sampleId\",\"type\":[\"null\",\"string\"],\"doc\":\"The unique identifier for this sample.\",\"default\":null},{\"name\":\"sampleDescription\",\"type\":[\"null\",\"string\"],\"doc\":\"A description of this sample.\",\"default\":null},{\"name\":\"processingDescription\",\"type\":[\"null\",\"string\"],\"doc\":\"A string describing the provenance of this sample and the processing applied\\n   in genotyping this sample.\",\"default\":null},{\"name\":\"alleles\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"enum\",\"name\":\"GenotypeAllele\",\"doc\":\"An enumeration that describes the allele that corresponds to a genotype. Can take\\n the following values:\\n\\n * Ref: The genot","ype is the reference allele\\n * Alt: The genotype is the alternate allele\\n * OtherAlt: The genotype is an unspecified other alternate allele. This occurs\\n   in our schema when we have split a multi-allelic genotype into two genotype\\n   records.\\n * NoCall: The genotype could not be called.\",\"symbols\":[\"Ref\",\"Alt\",\"OtherAlt\",\"NoCall\"]}},\"doc\":\"An array describing the genotype called at this site. The length of this\\n   array is equal to the ploidy of the sample at this site. This array may\\n   reference OtherAlt alleles if this site is multi-allelic in this sample.\",\"default\":[]},{\"name\":\"expectedAlleleDosage\",\"type\":[\"null\",\"float\"],\"doc\":\"The expected dosage of the alternate allele in this sample.\",\"default\":null},{\"name\":\"referenceReadDepth\",\"type\":[\"null\",\"int\"],\"doc\":\"The number of reads that show evidence for the reference at this site.\\n\\n   @see alternateReadDepth\\n   @see readDepth\",\"default\":null},{\"name\":\"alternateReadDepth\",\"type\":[\"null\",\"int\"],\"doc\":\"The number of reads that show evidence for this alternate allele at this site.\\n\\n   @see referenceReadDepth\\n   @see readDepth\",\"default\":null},{\"name\":\"readDepth\",\"type\":[\"null\",\"int\"],\"doc\":\"The total number of reads at this site. May not equal (alternateReadDepth +\\n   referenceReadDepth) if this site shows evidence of multiple alternate alleles.\\n\\n   @see referenceReadDepth\\n   @see alternateReadDepth\\n\\n   @note Analogous to VCF's DP.\",\"default\":null},{\"name\":\"minReadDepth\",\"type\":[\"null\",\"int\"],\"doc\":\"The minimum number of reads seen at this site across samples when joint\\n   calling variants.\\n\\n   @note Analogous to VCF's MIN_DP.\",\"default\":null},{\"name\":\"genotypeQuality\",\"type\":[\"null\",\"int\"],\"doc\":\"The phred-scaled probability that we're correct for this genotype call.\\n\\n   @note Analogous to VCF's GQ.\",\"default\":null},{\"name\":\"genotypeLikelihoods\",\"type\":{\"type\":\"array\",\"items\":\"float\"},\"doc\":\"Log scaled likelihoods that we have n copies of this alternate allele.\\n   The number of elements in this array should be equal to the ploidy at this\\n   site, plus 1.\\n\\n   @note Analogous to VCF's PL.\",\"default\":[]},{\"name\":\"nonReferenceLikelihoods\",\"type\":{\"type\":\"array\",\"items\":\"float\"},\"doc\":\"Log scaled likelihoods that we have n non-reference alleles at this site.\\n   The number of elements in this array should be equal to the ploidy at this\\n   site, plus 1.\",\"default\":[]},{\"name\":\"strandBiasComponents\",\"type\":{\"type\":\"array\",\"items\":\"int\"},\"doc\":\"Component statistics which comprise the Fisher's Exact Test to detect strand bias.\\n   If populated, this element should have length 4.\",\"default\":[]},{\"name\":\"splitFromMultiAllelic\",\"type\":[\"boolean\",\"null\"],\"doc\":\"We split multi-allelic VCF lines into multiple\\n   single-alternate records.  This bit is set if that happened for this\\n   record.\",\"default\":false},{\"name\":\"isPhased\",\"type\":[\"boolean\",\"null\"],\"doc\":\"True if this genotype is phased.\\n\\n   @see phaseSetId\\n   @see phaseQuality\",\"default\":false},{\"name\":\"phaseSetId\",\"type\":[\"null\",\"int\"],\"doc\":\"The ID of this phase set, if this genotype is phased. Should only be populated\\n   if isPhased == true; else should be null.\\n\\n   @see isPhased\",\"default\":null},{\"name\":\"phaseQuality\",\"type\":[\"null\",\"int\"],\"doc\":\"Phred scaled quality score for the phasing of this genotype, if this genotype\\n   is phased. Should only be populated if isPhased == true; else should be null.\\n\\n   @see isPhased\",\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
+  /** The variant identifier (RS number in studies). */
+  @Deprecated public java.lang.CharSequence variantIdentifier;
   /** The variant called at this site. */
   @Deprecated public org.bdgenomics.formats.avro.Variant variant;
   /** Statistics collected at this site, if available. */
@@ -96,7 +98,8 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
   /**
    * All-args constructor.
    */
-  public Genotype(org.bdgenomics.formats.avro.Variant variant, org.bdgenomics.formats.avro.VariantCallingAnnotations variantCallingAnnotations, java.lang.CharSequence sampleId, java.lang.CharSequence sampleDescription, java.lang.CharSequence processingDescription, java.util.List<org.bdgenomics.formats.avro.GenotypeAllele> alleles, java.lang.Float expectedAlleleDosage, java.lang.Integer referenceReadDepth, java.lang.Integer alternateReadDepth, java.lang.Integer readDepth, java.lang.Integer minReadDepth, java.lang.Integer genotypeQuality, java.util.List<java.lang.Float> genotypeLikelihoods, java.util.List<java.lang.Float> nonReferenceLikelihoods, java.util.List<java.lang.Integer> strandBiasComponents, java.lang.Boolean splitFromMultiAllelic, java.lang.Boolean isPhased, java.lang.Integer phaseSetId, java.lang.Integer phaseQuality) {
+  public Genotype(java.lang.CharSequence variantIdentifier, org.bdgenomics.formats.avro.Variant variant, org.bdgenomics.formats.avro.VariantCallingAnnotations variantCallingAnnotations, java.lang.CharSequence sampleId, java.lang.CharSequence sampleDescription, java.lang.CharSequence processingDescription, java.util.List<org.bdgenomics.formats.avro.GenotypeAllele> alleles, java.lang.Float expectedAlleleDosage, java.lang.Integer referenceReadDepth, java.lang.Integer alternateReadDepth, java.lang.Integer readDepth, java.lang.Integer minReadDepth, java.lang.Integer genotypeQuality, java.util.List<java.lang.Float> genotypeLikelihoods, java.util.List<java.lang.Float> nonReferenceLikelihoods, java.util.List<java.lang.Integer> strandBiasComponents, java.lang.Boolean splitFromMultiAllelic, java.lang.Boolean isPhased, java.lang.Integer phaseSetId, java.lang.Integer phaseQuality) {
+    this.variantIdentifier = variantIdentifier;
     this.variant = variant;
     this.variantCallingAnnotations = variantCallingAnnotations;
     this.sampleId = sampleId;
@@ -122,25 +125,26 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return variant;
-    case 1: return variantCallingAnnotations;
-    case 2: return sampleId;
-    case 3: return sampleDescription;
-    case 4: return processingDescription;
-    case 5: return alleles;
-    case 6: return expectedAlleleDosage;
-    case 7: return referenceReadDepth;
-    case 8: return alternateReadDepth;
-    case 9: return readDepth;
-    case 10: return minReadDepth;
-    case 11: return genotypeQuality;
-    case 12: return genotypeLikelihoods;
-    case 13: return nonReferenceLikelihoods;
-    case 14: return strandBiasComponents;
-    case 15: return splitFromMultiAllelic;
-    case 16: return isPhased;
-    case 17: return phaseSetId;
-    case 18: return phaseQuality;
+    case 0: return variantIdentifier;
+    case 1: return variant;
+    case 2: return variantCallingAnnotations;
+    case 3: return sampleId;
+    case 4: return sampleDescription;
+    case 5: return processingDescription;
+    case 6: return alleles;
+    case 7: return expectedAlleleDosage;
+    case 8: return referenceReadDepth;
+    case 9: return alternateReadDepth;
+    case 10: return readDepth;
+    case 11: return minReadDepth;
+    case 12: return genotypeQuality;
+    case 13: return genotypeLikelihoods;
+    case 14: return nonReferenceLikelihoods;
+    case 15: return strandBiasComponents;
+    case 16: return splitFromMultiAllelic;
+    case 17: return isPhased;
+    case 18: return phaseSetId;
+    case 19: return phaseQuality;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -148,27 +152,43 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: variant = (org.bdgenomics.formats.avro.Variant)value$; break;
-    case 1: variantCallingAnnotations = (org.bdgenomics.formats.avro.VariantCallingAnnotations)value$; break;
-    case 2: sampleId = (java.lang.CharSequence)value$; break;
-    case 3: sampleDescription = (java.lang.CharSequence)value$; break;
-    case 4: processingDescription = (java.lang.CharSequence)value$; break;
-    case 5: alleles = (java.util.List<org.bdgenomics.formats.avro.GenotypeAllele>)value$; break;
-    case 6: expectedAlleleDosage = (java.lang.Float)value$; break;
-    case 7: referenceReadDepth = (java.lang.Integer)value$; break;
-    case 8: alternateReadDepth = (java.lang.Integer)value$; break;
-    case 9: readDepth = (java.lang.Integer)value$; break;
-    case 10: minReadDepth = (java.lang.Integer)value$; break;
-    case 11: genotypeQuality = (java.lang.Integer)value$; break;
-    case 12: genotypeLikelihoods = (java.util.List<java.lang.Float>)value$; break;
-    case 13: nonReferenceLikelihoods = (java.util.List<java.lang.Float>)value$; break;
-    case 14: strandBiasComponents = (java.util.List<java.lang.Integer>)value$; break;
-    case 15: splitFromMultiAllelic = (java.lang.Boolean)value$; break;
-    case 16: isPhased = (java.lang.Boolean)value$; break;
-    case 17: phaseSetId = (java.lang.Integer)value$; break;
-    case 18: phaseQuality = (java.lang.Integer)value$; break;
+    case 0: variantIdentifier = (java.lang.CharSequence)value$; break;
+    case 1: variant = (org.bdgenomics.formats.avro.Variant)value$; break;
+    case 2: variantCallingAnnotations = (org.bdgenomics.formats.avro.VariantCallingAnnotations)value$; break;
+    case 3: sampleId = (java.lang.CharSequence)value$; break;
+    case 4: sampleDescription = (java.lang.CharSequence)value$; break;
+    case 5: processingDescription = (java.lang.CharSequence)value$; break;
+    case 6: alleles = (java.util.List<org.bdgenomics.formats.avro.GenotypeAllele>)value$; break;
+    case 7: expectedAlleleDosage = (java.lang.Float)value$; break;
+    case 8: referenceReadDepth = (java.lang.Integer)value$; break;
+    case 9: alternateReadDepth = (java.lang.Integer)value$; break;
+    case 10: readDepth = (java.lang.Integer)value$; break;
+    case 11: minReadDepth = (java.lang.Integer)value$; break;
+    case 12: genotypeQuality = (java.lang.Integer)value$; break;
+    case 13: genotypeLikelihoods = (java.util.List<java.lang.Float>)value$; break;
+    case 14: nonReferenceLikelihoods = (java.util.List<java.lang.Float>)value$; break;
+    case 15: strandBiasComponents = (java.util.List<java.lang.Integer>)value$; break;
+    case 16: splitFromMultiAllelic = (java.lang.Boolean)value$; break;
+    case 17: isPhased = (java.lang.Boolean)value$; break;
+    case 18: phaseSetId = (java.lang.Integer)value$; break;
+    case 19: phaseQuality = (java.lang.Integer)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
+  }
+
+  /**
+   * Gets the value of the 'variantIdentifier' field.
+   * The variant identifier (RS number in studies).   */
+  public java.lang.CharSequence getVariantIdentifier() {
+    return variantIdentifier;
+  }
+
+  /**
+   * Sets the value of the 'variantIdentifier' field.
+   * The variant identifier (RS number in studies).   * @param value the value to set.
+   */
+  public void setVariantIdentifier(java.lang.CharSequence value) {
+    this.variantIdentifier = value;
   }
 
   /**
@@ -553,6 +573,7 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Genotype>
     implements org.apache.avro.data.RecordBuilder<Genotype> {
 
+    private java.lang.CharSequence variantIdentifier;
     private org.bdgenomics.formats.avro.Variant variant;
     private org.bdgenomics.formats.avro.VariantCallingAnnotations variantCallingAnnotations;
     private java.lang.CharSequence sampleId;
@@ -581,163 +602,196 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     /** Creates a Builder by copying an existing Builder */
     private Builder(org.bdgenomics.formats.avro.Genotype.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.variant)) {
-        this.variant = data().deepCopy(fields()[0].schema(), other.variant);
+      if (isValidValue(fields()[0], other.variantIdentifier)) {
+        this.variantIdentifier = data().deepCopy(fields()[0].schema(), other.variantIdentifier);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.variantCallingAnnotations)) {
-        this.variantCallingAnnotations = data().deepCopy(fields()[1].schema(), other.variantCallingAnnotations);
+      if (isValidValue(fields()[1], other.variant)) {
+        this.variant = data().deepCopy(fields()[1].schema(), other.variant);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.sampleId)) {
-        this.sampleId = data().deepCopy(fields()[2].schema(), other.sampleId);
+      if (isValidValue(fields()[2], other.variantCallingAnnotations)) {
+        this.variantCallingAnnotations = data().deepCopy(fields()[2].schema(), other.variantCallingAnnotations);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.sampleDescription)) {
-        this.sampleDescription = data().deepCopy(fields()[3].schema(), other.sampleDescription);
+      if (isValidValue(fields()[3], other.sampleId)) {
+        this.sampleId = data().deepCopy(fields()[3].schema(), other.sampleId);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.processingDescription)) {
-        this.processingDescription = data().deepCopy(fields()[4].schema(), other.processingDescription);
+      if (isValidValue(fields()[4], other.sampleDescription)) {
+        this.sampleDescription = data().deepCopy(fields()[4].schema(), other.sampleDescription);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.alleles)) {
-        this.alleles = data().deepCopy(fields()[5].schema(), other.alleles);
+      if (isValidValue(fields()[5], other.processingDescription)) {
+        this.processingDescription = data().deepCopy(fields()[5].schema(), other.processingDescription);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.expectedAlleleDosage)) {
-        this.expectedAlleleDosage = data().deepCopy(fields()[6].schema(), other.expectedAlleleDosage);
+      if (isValidValue(fields()[6], other.alleles)) {
+        this.alleles = data().deepCopy(fields()[6].schema(), other.alleles);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.referenceReadDepth)) {
-        this.referenceReadDepth = data().deepCopy(fields()[7].schema(), other.referenceReadDepth);
+      if (isValidValue(fields()[7], other.expectedAlleleDosage)) {
+        this.expectedAlleleDosage = data().deepCopy(fields()[7].schema(), other.expectedAlleleDosage);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.alternateReadDepth)) {
-        this.alternateReadDepth = data().deepCopy(fields()[8].schema(), other.alternateReadDepth);
+      if (isValidValue(fields()[8], other.referenceReadDepth)) {
+        this.referenceReadDepth = data().deepCopy(fields()[8].schema(), other.referenceReadDepth);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.readDepth)) {
-        this.readDepth = data().deepCopy(fields()[9].schema(), other.readDepth);
+      if (isValidValue(fields()[9], other.alternateReadDepth)) {
+        this.alternateReadDepth = data().deepCopy(fields()[9].schema(), other.alternateReadDepth);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.minReadDepth)) {
-        this.minReadDepth = data().deepCopy(fields()[10].schema(), other.minReadDepth);
+      if (isValidValue(fields()[10], other.readDepth)) {
+        this.readDepth = data().deepCopy(fields()[10].schema(), other.readDepth);
         fieldSetFlags()[10] = true;
       }
-      if (isValidValue(fields()[11], other.genotypeQuality)) {
-        this.genotypeQuality = data().deepCopy(fields()[11].schema(), other.genotypeQuality);
+      if (isValidValue(fields()[11], other.minReadDepth)) {
+        this.minReadDepth = data().deepCopy(fields()[11].schema(), other.minReadDepth);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.genotypeLikelihoods)) {
-        this.genotypeLikelihoods = data().deepCopy(fields()[12].schema(), other.genotypeLikelihoods);
+      if (isValidValue(fields()[12], other.genotypeQuality)) {
+        this.genotypeQuality = data().deepCopy(fields()[12].schema(), other.genotypeQuality);
         fieldSetFlags()[12] = true;
       }
-      if (isValidValue(fields()[13], other.nonReferenceLikelihoods)) {
-        this.nonReferenceLikelihoods = data().deepCopy(fields()[13].schema(), other.nonReferenceLikelihoods);
+      if (isValidValue(fields()[13], other.genotypeLikelihoods)) {
+        this.genotypeLikelihoods = data().deepCopy(fields()[13].schema(), other.genotypeLikelihoods);
         fieldSetFlags()[13] = true;
       }
-      if (isValidValue(fields()[14], other.strandBiasComponents)) {
-        this.strandBiasComponents = data().deepCopy(fields()[14].schema(), other.strandBiasComponents);
+      if (isValidValue(fields()[14], other.nonReferenceLikelihoods)) {
+        this.nonReferenceLikelihoods = data().deepCopy(fields()[14].schema(), other.nonReferenceLikelihoods);
         fieldSetFlags()[14] = true;
       }
-      if (isValidValue(fields()[15], other.splitFromMultiAllelic)) {
-        this.splitFromMultiAllelic = data().deepCopy(fields()[15].schema(), other.splitFromMultiAllelic);
+      if (isValidValue(fields()[15], other.strandBiasComponents)) {
+        this.strandBiasComponents = data().deepCopy(fields()[15].schema(), other.strandBiasComponents);
         fieldSetFlags()[15] = true;
       }
-      if (isValidValue(fields()[16], other.isPhased)) {
-        this.isPhased = data().deepCopy(fields()[16].schema(), other.isPhased);
+      if (isValidValue(fields()[16], other.splitFromMultiAllelic)) {
+        this.splitFromMultiAllelic = data().deepCopy(fields()[16].schema(), other.splitFromMultiAllelic);
         fieldSetFlags()[16] = true;
       }
-      if (isValidValue(fields()[17], other.phaseSetId)) {
-        this.phaseSetId = data().deepCopy(fields()[17].schema(), other.phaseSetId);
+      if (isValidValue(fields()[17], other.isPhased)) {
+        this.isPhased = data().deepCopy(fields()[17].schema(), other.isPhased);
         fieldSetFlags()[17] = true;
       }
-      if (isValidValue(fields()[18], other.phaseQuality)) {
-        this.phaseQuality = data().deepCopy(fields()[18].schema(), other.phaseQuality);
+      if (isValidValue(fields()[18], other.phaseSetId)) {
+        this.phaseSetId = data().deepCopy(fields()[18].schema(), other.phaseSetId);
         fieldSetFlags()[18] = true;
+      }
+      if (isValidValue(fields()[19], other.phaseQuality)) {
+        this.phaseQuality = data().deepCopy(fields()[19].schema(), other.phaseQuality);
+        fieldSetFlags()[19] = true;
       }
     }
     
     /** Creates a Builder by copying an existing Genotype instance */
     private Builder(org.bdgenomics.formats.avro.Genotype other) {
             super(org.bdgenomics.formats.avro.Genotype.SCHEMA$);
-      if (isValidValue(fields()[0], other.variant)) {
-        this.variant = data().deepCopy(fields()[0].schema(), other.variant);
+      if (isValidValue(fields()[0], other.variantIdentifier)) {
+        this.variantIdentifier = data().deepCopy(fields()[0].schema(), other.variantIdentifier);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.variantCallingAnnotations)) {
-        this.variantCallingAnnotations = data().deepCopy(fields()[1].schema(), other.variantCallingAnnotations);
+      if (isValidValue(fields()[1], other.variant)) {
+        this.variant = data().deepCopy(fields()[1].schema(), other.variant);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.sampleId)) {
-        this.sampleId = data().deepCopy(fields()[2].schema(), other.sampleId);
+      if (isValidValue(fields()[2], other.variantCallingAnnotations)) {
+        this.variantCallingAnnotations = data().deepCopy(fields()[2].schema(), other.variantCallingAnnotations);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.sampleDescription)) {
-        this.sampleDescription = data().deepCopy(fields()[3].schema(), other.sampleDescription);
+      if (isValidValue(fields()[3], other.sampleId)) {
+        this.sampleId = data().deepCopy(fields()[3].schema(), other.sampleId);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.processingDescription)) {
-        this.processingDescription = data().deepCopy(fields()[4].schema(), other.processingDescription);
+      if (isValidValue(fields()[4], other.sampleDescription)) {
+        this.sampleDescription = data().deepCopy(fields()[4].schema(), other.sampleDescription);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.alleles)) {
-        this.alleles = data().deepCopy(fields()[5].schema(), other.alleles);
+      if (isValidValue(fields()[5], other.processingDescription)) {
+        this.processingDescription = data().deepCopy(fields()[5].schema(), other.processingDescription);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.expectedAlleleDosage)) {
-        this.expectedAlleleDosage = data().deepCopy(fields()[6].schema(), other.expectedAlleleDosage);
+      if (isValidValue(fields()[6], other.alleles)) {
+        this.alleles = data().deepCopy(fields()[6].schema(), other.alleles);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.referenceReadDepth)) {
-        this.referenceReadDepth = data().deepCopy(fields()[7].schema(), other.referenceReadDepth);
+      if (isValidValue(fields()[7], other.expectedAlleleDosage)) {
+        this.expectedAlleleDosage = data().deepCopy(fields()[7].schema(), other.expectedAlleleDosage);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.alternateReadDepth)) {
-        this.alternateReadDepth = data().deepCopy(fields()[8].schema(), other.alternateReadDepth);
+      if (isValidValue(fields()[8], other.referenceReadDepth)) {
+        this.referenceReadDepth = data().deepCopy(fields()[8].schema(), other.referenceReadDepth);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.readDepth)) {
-        this.readDepth = data().deepCopy(fields()[9].schema(), other.readDepth);
+      if (isValidValue(fields()[9], other.alternateReadDepth)) {
+        this.alternateReadDepth = data().deepCopy(fields()[9].schema(), other.alternateReadDepth);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.minReadDepth)) {
-        this.minReadDepth = data().deepCopy(fields()[10].schema(), other.minReadDepth);
+      if (isValidValue(fields()[10], other.readDepth)) {
+        this.readDepth = data().deepCopy(fields()[10].schema(), other.readDepth);
         fieldSetFlags()[10] = true;
       }
-      if (isValidValue(fields()[11], other.genotypeQuality)) {
-        this.genotypeQuality = data().deepCopy(fields()[11].schema(), other.genotypeQuality);
+      if (isValidValue(fields()[11], other.minReadDepth)) {
+        this.minReadDepth = data().deepCopy(fields()[11].schema(), other.minReadDepth);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.genotypeLikelihoods)) {
-        this.genotypeLikelihoods = data().deepCopy(fields()[12].schema(), other.genotypeLikelihoods);
+      if (isValidValue(fields()[12], other.genotypeQuality)) {
+        this.genotypeQuality = data().deepCopy(fields()[12].schema(), other.genotypeQuality);
         fieldSetFlags()[12] = true;
       }
-      if (isValidValue(fields()[13], other.nonReferenceLikelihoods)) {
-        this.nonReferenceLikelihoods = data().deepCopy(fields()[13].schema(), other.nonReferenceLikelihoods);
+      if (isValidValue(fields()[13], other.genotypeLikelihoods)) {
+        this.genotypeLikelihoods = data().deepCopy(fields()[13].schema(), other.genotypeLikelihoods);
         fieldSetFlags()[13] = true;
       }
-      if (isValidValue(fields()[14], other.strandBiasComponents)) {
-        this.strandBiasComponents = data().deepCopy(fields()[14].schema(), other.strandBiasComponents);
+      if (isValidValue(fields()[14], other.nonReferenceLikelihoods)) {
+        this.nonReferenceLikelihoods = data().deepCopy(fields()[14].schema(), other.nonReferenceLikelihoods);
         fieldSetFlags()[14] = true;
       }
-      if (isValidValue(fields()[15], other.splitFromMultiAllelic)) {
-        this.splitFromMultiAllelic = data().deepCopy(fields()[15].schema(), other.splitFromMultiAllelic);
+      if (isValidValue(fields()[15], other.strandBiasComponents)) {
+        this.strandBiasComponents = data().deepCopy(fields()[15].schema(), other.strandBiasComponents);
         fieldSetFlags()[15] = true;
       }
-      if (isValidValue(fields()[16], other.isPhased)) {
-        this.isPhased = data().deepCopy(fields()[16].schema(), other.isPhased);
+      if (isValidValue(fields()[16], other.splitFromMultiAllelic)) {
+        this.splitFromMultiAllelic = data().deepCopy(fields()[16].schema(), other.splitFromMultiAllelic);
         fieldSetFlags()[16] = true;
       }
-      if (isValidValue(fields()[17], other.phaseSetId)) {
-        this.phaseSetId = data().deepCopy(fields()[17].schema(), other.phaseSetId);
+      if (isValidValue(fields()[17], other.isPhased)) {
+        this.isPhased = data().deepCopy(fields()[17].schema(), other.isPhased);
         fieldSetFlags()[17] = true;
       }
-      if (isValidValue(fields()[18], other.phaseQuality)) {
-        this.phaseQuality = data().deepCopy(fields()[18].schema(), other.phaseQuality);
+      if (isValidValue(fields()[18], other.phaseSetId)) {
+        this.phaseSetId = data().deepCopy(fields()[18].schema(), other.phaseSetId);
         fieldSetFlags()[18] = true;
       }
+      if (isValidValue(fields()[19], other.phaseQuality)) {
+        this.phaseQuality = data().deepCopy(fields()[19].schema(), other.phaseQuality);
+        fieldSetFlags()[19] = true;
+      }
+    }
+
+    /** Gets the value of the 'variantIdentifier' field */
+    public java.lang.CharSequence getVariantIdentifier() {
+      return variantIdentifier;
+    }
+    
+    /** Sets the value of the 'variantIdentifier' field */
+    public org.bdgenomics.formats.avro.Genotype.Builder setVariantIdentifier(java.lang.CharSequence value) {
+      validate(fields()[0], value);
+      this.variantIdentifier = value;
+      fieldSetFlags()[0] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'variantIdentifier' field has been set */
+    public boolean hasVariantIdentifier() {
+      return fieldSetFlags()[0];
+    }
+    
+    /** Clears the value of the 'variantIdentifier' field */
+    public org.bdgenomics.formats.avro.Genotype.Builder clearVariantIdentifier() {
+      variantIdentifier = null;
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /** Gets the value of the 'variant' field */
@@ -747,21 +801,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'variant' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setVariant(org.bdgenomics.formats.avro.Variant value) {
-      validate(fields()[0], value);
+      validate(fields()[1], value);
       this.variant = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this; 
     }
     
     /** Checks whether the 'variant' field has been set */
     public boolean hasVariant() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
     
     /** Clears the value of the 'variant' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearVariant() {
       variant = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -772,21 +826,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'variantCallingAnnotations' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setVariantCallingAnnotations(org.bdgenomics.formats.avro.VariantCallingAnnotations value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.variantCallingAnnotations = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this; 
     }
     
     /** Checks whether the 'variantCallingAnnotations' field has been set */
     public boolean hasVariantCallingAnnotations() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
     
     /** Clears the value of the 'variantCallingAnnotations' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearVariantCallingAnnotations() {
       variantCallingAnnotations = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -797,21 +851,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'sampleId' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setSampleId(java.lang.CharSequence value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.sampleId = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this; 
     }
     
     /** Checks whether the 'sampleId' field has been set */
     public boolean hasSampleId() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
     
     /** Clears the value of the 'sampleId' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearSampleId() {
       sampleId = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -822,21 +876,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'sampleDescription' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setSampleDescription(java.lang.CharSequence value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.sampleDescription = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this; 
     }
     
     /** Checks whether the 'sampleDescription' field has been set */
     public boolean hasSampleDescription() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
     
     /** Clears the value of the 'sampleDescription' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearSampleDescription() {
       sampleDescription = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -847,21 +901,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'processingDescription' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setProcessingDescription(java.lang.CharSequence value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.processingDescription = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this; 
     }
     
     /** Checks whether the 'processingDescription' field has been set */
     public boolean hasProcessingDescription() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
     
     /** Clears the value of the 'processingDescription' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearProcessingDescription() {
       processingDescription = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -872,21 +926,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'alleles' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setAlleles(java.util.List<org.bdgenomics.formats.avro.GenotypeAllele> value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.alleles = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this; 
     }
     
     /** Checks whether the 'alleles' field has been set */
     public boolean hasAlleles() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
     
     /** Clears the value of the 'alleles' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearAlleles() {
       alleles = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -897,21 +951,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'expectedAlleleDosage' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setExpectedAlleleDosage(java.lang.Float value) {
-      validate(fields()[6], value);
+      validate(fields()[7], value);
       this.expectedAlleleDosage = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[7] = true;
       return this; 
     }
     
     /** Checks whether the 'expectedAlleleDosage' field has been set */
     public boolean hasExpectedAlleleDosage() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[7];
     }
     
     /** Clears the value of the 'expectedAlleleDosage' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearExpectedAlleleDosage() {
       expectedAlleleDosage = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -922,21 +976,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'referenceReadDepth' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setReferenceReadDepth(java.lang.Integer value) {
-      validate(fields()[7], value);
+      validate(fields()[8], value);
       this.referenceReadDepth = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[8] = true;
       return this; 
     }
     
     /** Checks whether the 'referenceReadDepth' field has been set */
     public boolean hasReferenceReadDepth() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[8];
     }
     
     /** Clears the value of the 'referenceReadDepth' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearReferenceReadDepth() {
       referenceReadDepth = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -947,21 +1001,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'alternateReadDepth' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setAlternateReadDepth(java.lang.Integer value) {
-      validate(fields()[8], value);
+      validate(fields()[9], value);
       this.alternateReadDepth = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[9] = true;
       return this; 
     }
     
     /** Checks whether the 'alternateReadDepth' field has been set */
     public boolean hasAlternateReadDepth() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[9];
     }
     
     /** Clears the value of the 'alternateReadDepth' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearAlternateReadDepth() {
       alternateReadDepth = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -972,21 +1026,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'readDepth' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setReadDepth(java.lang.Integer value) {
-      validate(fields()[9], value);
+      validate(fields()[10], value);
       this.readDepth = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[10] = true;
       return this; 
     }
     
     /** Checks whether the 'readDepth' field has been set */
     public boolean hasReadDepth() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[10];
     }
     
     /** Clears the value of the 'readDepth' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearReadDepth() {
       readDepth = null;
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[10] = false;
       return this;
     }
 
@@ -997,21 +1051,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'minReadDepth' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setMinReadDepth(java.lang.Integer value) {
-      validate(fields()[10], value);
+      validate(fields()[11], value);
       this.minReadDepth = value;
-      fieldSetFlags()[10] = true;
+      fieldSetFlags()[11] = true;
       return this; 
     }
     
     /** Checks whether the 'minReadDepth' field has been set */
     public boolean hasMinReadDepth() {
-      return fieldSetFlags()[10];
+      return fieldSetFlags()[11];
     }
     
     /** Clears the value of the 'minReadDepth' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearMinReadDepth() {
       minReadDepth = null;
-      fieldSetFlags()[10] = false;
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -1022,21 +1076,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'genotypeQuality' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setGenotypeQuality(java.lang.Integer value) {
-      validate(fields()[11], value);
+      validate(fields()[12], value);
       this.genotypeQuality = value;
-      fieldSetFlags()[11] = true;
+      fieldSetFlags()[12] = true;
       return this; 
     }
     
     /** Checks whether the 'genotypeQuality' field has been set */
     public boolean hasGenotypeQuality() {
-      return fieldSetFlags()[11];
+      return fieldSetFlags()[12];
     }
     
     /** Clears the value of the 'genotypeQuality' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearGenotypeQuality() {
       genotypeQuality = null;
-      fieldSetFlags()[11] = false;
+      fieldSetFlags()[12] = false;
       return this;
     }
 
@@ -1047,21 +1101,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'genotypeLikelihoods' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setGenotypeLikelihoods(java.util.List<java.lang.Float> value) {
-      validate(fields()[12], value);
+      validate(fields()[13], value);
       this.genotypeLikelihoods = value;
-      fieldSetFlags()[12] = true;
+      fieldSetFlags()[13] = true;
       return this; 
     }
     
     /** Checks whether the 'genotypeLikelihoods' field has been set */
     public boolean hasGenotypeLikelihoods() {
-      return fieldSetFlags()[12];
+      return fieldSetFlags()[13];
     }
     
     /** Clears the value of the 'genotypeLikelihoods' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearGenotypeLikelihoods() {
       genotypeLikelihoods = null;
-      fieldSetFlags()[12] = false;
+      fieldSetFlags()[13] = false;
       return this;
     }
 
@@ -1072,21 +1126,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'nonReferenceLikelihoods' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setNonReferenceLikelihoods(java.util.List<java.lang.Float> value) {
-      validate(fields()[13], value);
+      validate(fields()[14], value);
       this.nonReferenceLikelihoods = value;
-      fieldSetFlags()[13] = true;
+      fieldSetFlags()[14] = true;
       return this; 
     }
     
     /** Checks whether the 'nonReferenceLikelihoods' field has been set */
     public boolean hasNonReferenceLikelihoods() {
-      return fieldSetFlags()[13];
+      return fieldSetFlags()[14];
     }
     
     /** Clears the value of the 'nonReferenceLikelihoods' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearNonReferenceLikelihoods() {
       nonReferenceLikelihoods = null;
-      fieldSetFlags()[13] = false;
+      fieldSetFlags()[14] = false;
       return this;
     }
 
@@ -1097,21 +1151,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'strandBiasComponents' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setStrandBiasComponents(java.util.List<java.lang.Integer> value) {
-      validate(fields()[14], value);
+      validate(fields()[15], value);
       this.strandBiasComponents = value;
-      fieldSetFlags()[14] = true;
+      fieldSetFlags()[15] = true;
       return this; 
     }
     
     /** Checks whether the 'strandBiasComponents' field has been set */
     public boolean hasStrandBiasComponents() {
-      return fieldSetFlags()[14];
+      return fieldSetFlags()[15];
     }
     
     /** Clears the value of the 'strandBiasComponents' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearStrandBiasComponents() {
       strandBiasComponents = null;
-      fieldSetFlags()[14] = false;
+      fieldSetFlags()[15] = false;
       return this;
     }
 
@@ -1122,21 +1176,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'splitFromMultiAllelic' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setSplitFromMultiAllelic(java.lang.Boolean value) {
-      validate(fields()[15], value);
+      validate(fields()[16], value);
       this.splitFromMultiAllelic = value;
-      fieldSetFlags()[15] = true;
+      fieldSetFlags()[16] = true;
       return this; 
     }
     
     /** Checks whether the 'splitFromMultiAllelic' field has been set */
     public boolean hasSplitFromMultiAllelic() {
-      return fieldSetFlags()[15];
+      return fieldSetFlags()[16];
     }
     
     /** Clears the value of the 'splitFromMultiAllelic' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearSplitFromMultiAllelic() {
       splitFromMultiAllelic = null;
-      fieldSetFlags()[15] = false;
+      fieldSetFlags()[16] = false;
       return this;
     }
 
@@ -1147,21 +1201,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'isPhased' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setIsPhased(java.lang.Boolean value) {
-      validate(fields()[16], value);
+      validate(fields()[17], value);
       this.isPhased = value;
-      fieldSetFlags()[16] = true;
+      fieldSetFlags()[17] = true;
       return this; 
     }
     
     /** Checks whether the 'isPhased' field has been set */
     public boolean hasIsPhased() {
-      return fieldSetFlags()[16];
+      return fieldSetFlags()[17];
     }
     
     /** Clears the value of the 'isPhased' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearIsPhased() {
       isPhased = null;
-      fieldSetFlags()[16] = false;
+      fieldSetFlags()[17] = false;
       return this;
     }
 
@@ -1172,21 +1226,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'phaseSetId' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setPhaseSetId(java.lang.Integer value) {
-      validate(fields()[17], value);
+      validate(fields()[18], value);
       this.phaseSetId = value;
-      fieldSetFlags()[17] = true;
+      fieldSetFlags()[18] = true;
       return this; 
     }
     
     /** Checks whether the 'phaseSetId' field has been set */
     public boolean hasPhaseSetId() {
-      return fieldSetFlags()[17];
+      return fieldSetFlags()[18];
     }
     
     /** Clears the value of the 'phaseSetId' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearPhaseSetId() {
       phaseSetId = null;
-      fieldSetFlags()[17] = false;
+      fieldSetFlags()[18] = false;
       return this;
     }
 
@@ -1197,21 +1251,21 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     
     /** Sets the value of the 'phaseQuality' field */
     public org.bdgenomics.formats.avro.Genotype.Builder setPhaseQuality(java.lang.Integer value) {
-      validate(fields()[18], value);
+      validate(fields()[19], value);
       this.phaseQuality = value;
-      fieldSetFlags()[18] = true;
+      fieldSetFlags()[19] = true;
       return this; 
     }
     
     /** Checks whether the 'phaseQuality' field has been set */
     public boolean hasPhaseQuality() {
-      return fieldSetFlags()[18];
+      return fieldSetFlags()[19];
     }
     
     /** Clears the value of the 'phaseQuality' field */
     public org.bdgenomics.formats.avro.Genotype.Builder clearPhaseQuality() {
       phaseQuality = null;
-      fieldSetFlags()[18] = false;
+      fieldSetFlags()[19] = false;
       return this;
     }
 
@@ -1219,25 +1273,26 @@ public class Genotype extends org.apache.avro.specific.SpecificRecordBase implem
     public Genotype build() {
       try {
         Genotype record = new Genotype();
-        record.variant = fieldSetFlags()[0] ? this.variant : (org.bdgenomics.formats.avro.Variant) defaultValue(fields()[0]);
-        record.variantCallingAnnotations = fieldSetFlags()[1] ? this.variantCallingAnnotations : (org.bdgenomics.formats.avro.VariantCallingAnnotations) defaultValue(fields()[1]);
-        record.sampleId = fieldSetFlags()[2] ? this.sampleId : (java.lang.CharSequence) defaultValue(fields()[2]);
-        record.sampleDescription = fieldSetFlags()[3] ? this.sampleDescription : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.processingDescription = fieldSetFlags()[4] ? this.processingDescription : (java.lang.CharSequence) defaultValue(fields()[4]);
-        record.alleles = fieldSetFlags()[5] ? this.alleles : (java.util.List<org.bdgenomics.formats.avro.GenotypeAllele>) defaultValue(fields()[5]);
-        record.expectedAlleleDosage = fieldSetFlags()[6] ? this.expectedAlleleDosage : (java.lang.Float) defaultValue(fields()[6]);
-        record.referenceReadDepth = fieldSetFlags()[7] ? this.referenceReadDepth : (java.lang.Integer) defaultValue(fields()[7]);
-        record.alternateReadDepth = fieldSetFlags()[8] ? this.alternateReadDepth : (java.lang.Integer) defaultValue(fields()[8]);
-        record.readDepth = fieldSetFlags()[9] ? this.readDepth : (java.lang.Integer) defaultValue(fields()[9]);
-        record.minReadDepth = fieldSetFlags()[10] ? this.minReadDepth : (java.lang.Integer) defaultValue(fields()[10]);
-        record.genotypeQuality = fieldSetFlags()[11] ? this.genotypeQuality : (java.lang.Integer) defaultValue(fields()[11]);
-        record.genotypeLikelihoods = fieldSetFlags()[12] ? this.genotypeLikelihoods : (java.util.List<java.lang.Float>) defaultValue(fields()[12]);
-        record.nonReferenceLikelihoods = fieldSetFlags()[13] ? this.nonReferenceLikelihoods : (java.util.List<java.lang.Float>) defaultValue(fields()[13]);
-        record.strandBiasComponents = fieldSetFlags()[14] ? this.strandBiasComponents : (java.util.List<java.lang.Integer>) defaultValue(fields()[14]);
-        record.splitFromMultiAllelic = fieldSetFlags()[15] ? this.splitFromMultiAllelic : (java.lang.Boolean) defaultValue(fields()[15]);
-        record.isPhased = fieldSetFlags()[16] ? this.isPhased : (java.lang.Boolean) defaultValue(fields()[16]);
-        record.phaseSetId = fieldSetFlags()[17] ? this.phaseSetId : (java.lang.Integer) defaultValue(fields()[17]);
-        record.phaseQuality = fieldSetFlags()[18] ? this.phaseQuality : (java.lang.Integer) defaultValue(fields()[18]);
+        record.variantIdentifier = fieldSetFlags()[0] ? this.variantIdentifier : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.variant = fieldSetFlags()[1] ? this.variant : (org.bdgenomics.formats.avro.Variant) defaultValue(fields()[1]);
+        record.variantCallingAnnotations = fieldSetFlags()[2] ? this.variantCallingAnnotations : (org.bdgenomics.formats.avro.VariantCallingAnnotations) defaultValue(fields()[2]);
+        record.sampleId = fieldSetFlags()[3] ? this.sampleId : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.sampleDescription = fieldSetFlags()[4] ? this.sampleDescription : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.processingDescription = fieldSetFlags()[5] ? this.processingDescription : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.alleles = fieldSetFlags()[6] ? this.alleles : (java.util.List<org.bdgenomics.formats.avro.GenotypeAllele>) defaultValue(fields()[6]);
+        record.expectedAlleleDosage = fieldSetFlags()[7] ? this.expectedAlleleDosage : (java.lang.Float) defaultValue(fields()[7]);
+        record.referenceReadDepth = fieldSetFlags()[8] ? this.referenceReadDepth : (java.lang.Integer) defaultValue(fields()[8]);
+        record.alternateReadDepth = fieldSetFlags()[9] ? this.alternateReadDepth : (java.lang.Integer) defaultValue(fields()[9]);
+        record.readDepth = fieldSetFlags()[10] ? this.readDepth : (java.lang.Integer) defaultValue(fields()[10]);
+        record.minReadDepth = fieldSetFlags()[11] ? this.minReadDepth : (java.lang.Integer) defaultValue(fields()[11]);
+        record.genotypeQuality = fieldSetFlags()[12] ? this.genotypeQuality : (java.lang.Integer) defaultValue(fields()[12]);
+        record.genotypeLikelihoods = fieldSetFlags()[13] ? this.genotypeLikelihoods : (java.util.List<java.lang.Float>) defaultValue(fields()[13]);
+        record.nonReferenceLikelihoods = fieldSetFlags()[14] ? this.nonReferenceLikelihoods : (java.util.List<java.lang.Float>) defaultValue(fields()[14]);
+        record.strandBiasComponents = fieldSetFlags()[15] ? this.strandBiasComponents : (java.util.List<java.lang.Integer>) defaultValue(fields()[15]);
+        record.splitFromMultiAllelic = fieldSetFlags()[16] ? this.splitFromMultiAllelic : (java.lang.Boolean) defaultValue(fields()[16]);
+        record.isPhased = fieldSetFlags()[17] ? this.isPhased : (java.lang.Boolean) defaultValue(fields()[17]);
+        record.phaseSetId = fieldSetFlags()[18] ? this.phaseSetId : (java.lang.Integer) defaultValue(fields()[18]);
+        record.phaseQuality = fieldSetFlags()[19] ? this.phaseQuality : (java.lang.Integer) defaultValue(fields()[19]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
